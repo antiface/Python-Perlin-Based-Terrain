@@ -37,7 +37,7 @@ def getBiome(height,temperature,moisture,seaLevel,mountainLevel):
     if temperature <= 192:
         if height >= mountainLevel:
             return "MOUNTAIN"
-        if height >= mountainLevel/2:
+        if height >= mountainLevel/1.25:
             return "HIGHLANDS"
         if moisture <= 50:
             return "DESERT"
@@ -48,7 +48,7 @@ def getBiome(height,temperature,moisture,seaLevel,mountainLevel):
         return "SWAMP"
     if height >= mountainLevel:
         return "MOUNTAIN"
-    if height >= mountainLevel/2:
+    if height >= mountainLevel/1.25:
         return "MESA"
     if moisture <= 75:
         return "DESERT"
