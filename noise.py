@@ -23,27 +23,28 @@ def lerp(a,b,t):
     return a*(1-t) + b*t
 
 def interpolationCurve(t,interpolationMethod):
-    if interpolationMethod is "HERMITE":
+    if interpolationMethod == "HERMITE":
         return t * t * t *(t * (t * 6 - 15) + 10)
-    if interpolationMethod is "COSINE":
+    if interpolationMethod == "COSINE":
         return (1.0 - cos(pi*t))/2.0
-    if interpolationMethod is "LINEAR":
+    if interpolationMethod == "LINEAR":
         return t
-    if interpolationMethod is "NEAREST-NEIGHBOUR":
+    if interpolationMethod == "NEAREST-NEIGHBOUR":
         return int(t)
     
 def interpolationCurveX2(t,interpolationMethod):
-    if interpolationMethod is "HERMITE":
+    
+    if interpolationMethod == "HERMITE":
         x = 6*(t.x**5) - 15*(t.x**4) + 10*(t.x**3)
         y = 6*(t.y**5) - 15*(t.y**4) + 10*(t.y**3)
         return Vector2f(x,y)
-    if interpolationMethod is "COSINE":
+    if interpolationMethod == "COSINE":
         x = (1.0 - cos(pi*t.x))/2.0
         y = (1.0 - cos(pi*t.y))/2.0
         return Vector2f(x,y)
-    if interpolationMethod is "LINEAR":
+    if interpolationMethod == "LINEAR":
         return Vector2f(t.x,t.y)
-    if interpolationMethod is "NEAREST-NEIGHBOUR":
+    if interpolationMethod == "NEAREST-NEIGHBOUR":
         return Vector2f(int(t.x),int(t.y))
 
 def intNoise2D(x,y,seed):
@@ -120,7 +121,7 @@ def fractionalBrownianMotion(width,height,interpolationMethod,seed,startfrequenc
             
             for octave in xrange(octaves):
                 #For each octave
-                value += amplitude*perlin.getNoise(i/frequency,j/frequency,seed,interpolationMethod)
+                value += 1.414*amplitude*perlin.getNoise(i/frequency,j/frequency,seed,interpolationMethod)
                 amplitude *= persistence
                 frequency /= lacunarity
             #Assign 8bit integer height/lightness value
@@ -136,7 +137,7 @@ def perlinMap(width,height,frequency,interpolationMethod,seed):
     for i in xrange(width):
         for j in xrange(height):
             #For each value
-            value = perlin.getNoise(i/frequency,j/frequency,seed,interpolationMethod)
+            value = 1.414*perlin.getNoise(i/frequency,j/frequency,seed,interpolationMethod)
             #Assign 8bit integer height/lightness value
             value = int((0.5*value+0.5)*0xff)
             values[i][j] = value       
